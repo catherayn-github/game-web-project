@@ -1,4 +1,5 @@
 import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         }}
       >
         <GridItem area="nav" bg="gold">
-          Nav
+          <NavigationBar />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" bg="tomato">
