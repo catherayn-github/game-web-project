@@ -10,7 +10,7 @@ function App() {
           lg: `"nav nav" "aside main"`, // this is for large devices that is 1024px and above
         }}
       >
-        <GridItem area="nav" bg="gold">
+        <GridItem area="nav">
           <NavigationBar />
         </GridItem>
         <Show above="lg">
