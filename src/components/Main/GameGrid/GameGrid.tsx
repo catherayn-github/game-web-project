@@ -5,12 +5,14 @@ import GameCard from "../GameCard/GameCard";
 import GameCardSkeleton from "../GameCard/GameCardSkeleton";
 import GameCardContainer from "../GameCard/GameCardContainer";
 import { Genre } from "../../../services/genre-service";
+import { Platform } from "../../../services/platform-service";
 
 interface Props {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
-function GameGrid({ selectedGenre }: Props) {
-  const { data, isLoading } = useGames(selectedGenre);
+function GameGrid({ selectedGenre, selectedPlatform }: Props) {
+  const { data, isLoading } = useGames(selectedGenre, selectedPlatform);
   const skeletonCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

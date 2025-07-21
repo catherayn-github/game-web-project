@@ -1,37 +1,21 @@
 import { Game } from "../services/game-service";
-import {AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from "axios";
 import { Genre } from "../services/genre-service";
 import useData from "./useData";
+import { Platform } from "../services/platform-service";
 
-
-function useGames(selectedGenre: Genre | null) {
-    return useData<Game>('/games', {params : {genres : selectedGenre?.id}}, [selectedGenre?.id]);
+function useGames(
+  selectedGenre: Genre | null,
+  selectedPlatform: Platform | null
+) {
+  return useData<Game>(
+    "/games",
+    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
+    [selectedGenre?.id, selectedPlatform?.id] //dependencies
+  );
 }
 
 export default useGames;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -57,7 +41,6 @@ export default useGames;
 // import gameService, { Game, GamesResponse } from "../services/game-service";
 // import {AxiosRequestConfig, CanceledError } from "axios";
 // import { Genre } from "../services/genre-service";
-
 
 // function useGames(selectedGenre: Genre | null, requestConfig? : AxiosRequestConfig) {
 //   const [games, setGames] = useState<Game[]>([]);
