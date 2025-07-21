@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
 import apiClient from "../services/api-clients";
 
 //T means generic Type Parameter
@@ -9,7 +9,7 @@ interface FetchResponse <T> {
     
 }
 
-function useData<T>(endpoint: string) {
+function useData<T>(endpoint: string, requestConfig? : AxiosRequestConfig, dependencies?:any[]) {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ function useData<T>(endpoint: string) {
     setLoading(true);
     
     apiClient
-      .get<FetchResponse<T>>(endpoint, { signal : controller.signal })
+      .get<FetchResponse<T>>(endpoint, { signal : controller.signal, ...requestConfig })
       .then((res) => {
         setData(res.data.results);
         setLoading(false);
@@ -29,7 +29,7 @@ function useData<T>(endpoint: string) {
         setError(error.message);
         setLoading(false);
       })
-  }, []);
+  }, dependencies ? [...dependencies] : []);
 
   return { data, error, isLoading };
 
