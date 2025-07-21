@@ -9,7 +9,7 @@ function useGames(gameQuery: GameQuery
 ) {
   return useData<Game>(
     "/games",
-    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } },
+    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id, ordering: gameQuery.sortOrder} },
     [gameQuery] //dependencies
   );
 }
