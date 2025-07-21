@@ -42,6 +42,7 @@ function App() {
         </Show>
 
         <GridItem area="main">
+          {/* if there is an issues with the margin you can solve it by changing the HStack into a Flex and then wrap each iteam in a Box and give it a marginRight */}
           <HStack spacing={5} paddingLeft={5} marginBottom={5} >
             <PlatformFilter
               onSelectPlatform={(platform) =>
