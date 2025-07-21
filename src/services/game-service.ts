@@ -10,6 +10,7 @@ export interface Game {
     name : string;
     background_image : string
     parent_platforms : {platform : Platform}[] //array of objects where each objects has a property called Platform of type Platform
+    metacritic : number
 }
 
 export interface Platform{
