@@ -1,7 +1,7 @@
 import { Game } from "../services/game-service";
 import {AxiosRequestConfig } from "axios";
 import { Genre } from "../services/genre-service";
-import useData from "./UseData";
+import useData from "./useData";
 
 
 function useGames(selectedGenre: Genre | null) {
