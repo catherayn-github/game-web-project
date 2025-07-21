@@ -3,15 +3,14 @@ import { AxiosRequestConfig } from "axios";
 import { Genre } from "../services/genre-service";
 import useData from "./useData";
 import { Platform } from "../services/platform-service";
+import { GameQuery } from "../App";
 
-function useGames(
-  selectedGenre: Genre | null,
-  selectedPlatform: Platform | null
+function useGames(gameQuery: GameQuery
 ) {
   return useData<Game>(
     "/games",
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
-    [selectedGenre?.id, selectedPlatform?.id] //dependencies
+    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } },
+    [gameQuery] //dependencies
   );
 }
 
