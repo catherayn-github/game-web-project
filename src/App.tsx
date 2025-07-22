@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show, Box } from "@chakra-ui/react";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import GameGrid from "./components/Main/GameGrid/GameGrid";
 import ListOfGenres from "./components/Aside/ListOfGenres/ListOfGenres";
@@ -7,7 +7,7 @@ import { Genre } from "./services/genre-service";
 import PlatformFilter from "./components/Main/PlatformFilter/PlatformFilter";
 import { Platform } from "./services/platform-service";
 import SortFilter from "./components/Main/SortFilter/SortFilter";
-
+import GameHeader from "./components/Main/GameHeader/GameHeader";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -32,7 +32,11 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <NavigationBar onSearch={(searchText) => setGameQuery({...gameQuery, searchText})} />
+          <NavigationBar
+            onSearch={(searchText) =>
+              setGameQuery({ ...gameQuery, searchText })
+            }
+          />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
@@ -44,16 +48,25 @@ function App() {
         </Show>
 
         <GridItem area="main">
-          {/* if there is an issues with the margin you can solve it by changing the HStack into a Flex and then wrap each iteam in a Box and give it a marginRight */}
-          <HStack spacing={5} paddingLeft={5} marginBottom={5} >
-            <PlatformFilter
-              onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
-              }
-              selectedPlatform={gameQuery.platform}
-            />
-            <SortFilter onSelectSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})} selectedSortOrder={gameQuery.sortOrder}/>
-          </HStack>
+          <Box paddingLeft={5}>
+            <GameHeader gameQuery={gameQuery} />
+            {/* if there is an issues with the margin you can solve it by changing the HStack into a Flex and then wrap each iteam in a Box and give it a marginRight */}
+
+            <HStack spacing={5}  marginBottom={5}>
+              <PlatformFilter
+                onSelectPlatform={(platform) =>
+                  setGameQuery({ ...gameQuery, platform })
+                }
+                selectedPlatform={gameQuery.platform}
+              />
+              <SortFilter
+                onSelectSortOrder={(sortOrder) =>
+                  setGameQuery({ ...gameQuery, sortOrder })
+                }
+                selectedSortOrder={gameQuery.sortOrder}
+              />
+            </HStack>
+          </Box>
 
           <GameGrid gameQuery={gameQuery} />
         </GridItem>
