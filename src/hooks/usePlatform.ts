@@ -1,9 +1,7 @@
-import { Platform } from "../services/platform-service";
-import useData from "./useData";
-
+import platforms from "../data/platforms";
 
 function usePlatform() {
-  return useData<Platform>('/platforms/lists/parents');
+  return ({data : platforms, isLoading : false, error : null});
 }
 
 export default usePlatform;

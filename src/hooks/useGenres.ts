@@ -1,9 +1,12 @@
-import genreService, { Genre } from "../services/genre-service";
-import useData from "./useData";
-
+import genres from "../data/genres";
 
 function useGenres() {
-  return useData<Genre>('/genres');
+  return (
+    {
+      data : genres,
+      isLoading : false,
+      error : null
+    });
 }
 
 export default useGenres;
