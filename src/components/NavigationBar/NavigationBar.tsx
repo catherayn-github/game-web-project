@@ -4,12 +4,17 @@ import logo from '../../assets/Logo/logo.webp'
 import ColorModeToggleButton from './ColorModeToggleButton.tsx'
 import SearchBar from './SearchBar'
 
-function NavigationBar() {
+interface Props {
+  onSearch: (searchText: string) => void
+
+}
+
+function NavigationBar({onSearch}: Props) {
   return (
     <div>
         <HStack padding="10px">
             <Image src={logo} alt="logo" boxSize={"60px"}/>
-            <SearchBar/>
+            <SearchBar onSearch={onSearch}/>
             <ColorModeToggleButton/>
         </HStack>
     </div>
