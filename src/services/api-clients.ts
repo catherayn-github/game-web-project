@@ -1,5 +1,12 @@
 import axios from "axios";
 
+//T means generic Type Parameter
+export interface FetchResponse <T> {
+    count: number;
+    results: T[]; 
+    
+}
+
 export default axios.create({
     baseURL : 'https://api.rawg.io/api',
     params: {

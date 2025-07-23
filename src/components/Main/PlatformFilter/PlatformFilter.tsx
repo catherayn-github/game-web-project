@@ -3,6 +3,7 @@ import React from "react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../../../hooks/usePlatform";
 import {Platform} from "../../../services/platform-service";
+import { FetchResponse } from "../../../services/api-clients";
 
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
@@ -16,7 +17,7 @@ function PlatformFilter({onSelectPlatform, selectedPlatform}: Props) {
         {selectedPlatform?.name || "Platforms"}
       </MenuButton>
       <MenuList>
-        {data.map((platform) => ( <MenuItem key={platform.id} onClick={() => (onSelectPlatform(platform))}> {platform.name} </MenuItem>))}
+        {data?.results.map((platform) => ( <MenuItem key={platform.id} onClick={() => (onSelectPlatform(platform))}> {platform.name} </MenuItem>))}
       </MenuList>
     </Menu>
   );

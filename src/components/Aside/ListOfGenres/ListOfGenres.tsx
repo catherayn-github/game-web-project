@@ -24,7 +24,7 @@ function ListOfGenres({ onSelectGenre, selectedGenre }: Props) {
     <>
     <Heading marginBottom={3} fontSize="2xl">Genres</Heading>
       <List>
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               {/* add objectFit="cover" to make the image cover the container, preserve its aspect ratio*/}

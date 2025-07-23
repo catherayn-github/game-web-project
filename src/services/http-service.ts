@@ -5,14 +5,14 @@ interface Entity {
     count ?: number;
 }
 
-class HttpService {
+class HttpService <T> {
     endpoint : string;
 
     constructor(endpoint : string) {
         this.endpoint = endpoint;
     }
 
-    get<T> (){
+    get (){
         const controller = new AbortController();
         
         const request = apiClient.get<T>(this.endpoint, {
