@@ -3,9 +3,9 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import GameGrid from "./components/Main/GameGrid/GameGrid";
 import ListOfGenres from "./components/Aside/ListOfGenres/ListOfGenres";
 import { useState } from "react";
-import { Genre } from "./services/genre-service";
+import { Genre } from "./hooks/useGenres";
 import PlatformFilter from "./components/Main/PlatformFilter/PlatformFilter";
-import { Platform } from "./services/platform-service";
+import { Platform } from "./hooks/usePlatform";
 import SortFilter from "./components/Main/SortFilter/SortFilter";
 import GameHeader from "./components/Main/GameHeader/GameHeader";
 

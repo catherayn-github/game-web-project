@@ -1,12 +1,19 @@
-import { Game } from "../services/game-service";
-import { AxiosRequestConfig } from "axios";
-import { Genre } from "../services/genre-service";
+
 import { FetchResponse } from "../services/api-clients";
-import { Platform } from "../services/platform-service";
 import { GameQuery } from "../App";
 import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GAMES } from "../constant";
 import apiClient from "../services/api-clients";
+import { Platform } from "./usePlatform";
+
+
+export interface Game {
+    id : number;
+    name : string;
+    background_image : string
+    parent_platforms : {platform : Platform}[] //array of objects where each objects has a property called Platform of type Platform
+    metacritic : number
+}
 
 function useGames(gameQuery: GameQuery) {
   return useQuery<FetchResponse<Game>, Error>({

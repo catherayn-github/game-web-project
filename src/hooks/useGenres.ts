@@ -2,9 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import genres from "../data/genres";
 import { CACHE_KEY_GENRES } from "../constant";
 import { FetchResponse } from "../services/api-clients";
-import { Genre } from "../services/genre-service";
+
 import apiClient from "../services/api-clients";
 
+export interface Genre {
+    id : number;
+    name : string;
+    image_background : string
+  
+}
 
 function useGenres() {
  

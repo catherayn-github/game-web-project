@@ -3,7 +3,13 @@ import platforms from "../data/platforms";
 import { CACHE_KEY_PLATFORMS } from "../constant";
 import apiClients from "../services/api-clients";
 import { FetchResponse } from "../services/api-clients";
-import { Platform } from "../services/platform-service";
+
+
+export interface Platform {
+    id : number
+    name : string
+    slug : string
+}
 
 function usePlatform() {
   return useQuery ({
