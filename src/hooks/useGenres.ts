@@ -1,28 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import genres from "../data/genres";
 import { CACHE_KEY_GENRES } from "../constant";
-import { FetchResponse } from "../services/api-clients";
-
-import apiClient from "../services/api-clients";
+import genreService from "../services/genre-service";
 
 export interface Genre {
-    id : number;
-    name : string;
-    image_background : string
-  
+  id: number;
+  name: string;
+  image_background: string;
 }
 
 function useGenres() {
- 
   return useQuery({
     queryKey: CACHE_KEY_GENRES,
-    // queryFn : useData<Genre>('/genres')
-    queryFn : () => apiClient
-    .get<FetchResponse<Genre>>('/genres')
-    .then(res => res.data),
+    queryFn: genreService.getData,
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
-    initialData : genres
-  })
+    initialData: genres,
+  });
 }
 
 export default useGenres;

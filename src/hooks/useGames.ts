@@ -1,41 +1,32 @@
-
 import { FetchResponse } from "../services/api-clients";
 import { GameQuery } from "../App";
 import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GAMES } from "../constant";
-import apiClient from "../services/api-clients";
+import gameService from "../services/game-service";
 import { Platform } from "./usePlatform";
 
-
 export interface Game {
-    id : number;
-    name : string;
-    background_image : string
-    parent_platforms : {platform : Platform}[] //array of objects where each objects has a property called Platform of type Platform
-    metacritic : number
+  id: number;
+  name: string;
+  background_image: string;
+  parent_platforms: { platform: Platform }[]; //array of objects where each objects has a property called Platform of type Platform
+  metacritic: number;
 }
 
 function useGames(gameQuery: GameQuery) {
   return useQuery<FetchResponse<Game>, Error>({
     queryKey: [CACHE_KEY_GAMES, gameQuery],
     queryFn: () =>
-      apiClient
-        .get<FetchResponse<Game>>(
-          "/games",
-          {
-            params: {
-              genres: gameQuery.genre?.id,
-              parent_platforms: gameQuery.platform?.id,
-              ordering: gameQuery.sortOrder,
-              search: gameQuery.searchText,
-            },
-          }
-        )
-        .then((response) => response.data),
-        staleTime : 24 * 60 * 60 * 1000
-
+      gameService.getData({
+        params: {
+          genres: gameQuery.genre?.id,
+          parent_platforms: gameQuery.platform?.id,
+          ordering: gameQuery.sortOrder,
+          search: gameQuery.searchText,
+        }
+      }),
+      staleTime : 24*60*60*1000
   });
 }
 
 export default useGames;
-
