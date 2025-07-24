@@ -3,7 +3,7 @@ import { GameQuery } from "../App";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GAMES } from "../constant";
 import gameService from "../services/game-service";
-import { Platform } from "./usePlatform";
+import { Platform } from "./usePlatforms";
 
 export interface Game {
   id: number;

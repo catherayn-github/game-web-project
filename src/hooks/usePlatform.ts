@@ -1,25 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import platforms from "../data/platforms";
-import { CACHE_KEY_PLATFORMS } from "../constant";
-import apiClients from "../services/api-clients";
-import { FetchResponse } from "../services/api-clients";
-import platformService from "../services/platform-service";
+import { GameQuery } from "../App";
+import usePlatforms from "./usePlatforms";
 
-
-export interface Platform {
-    id : number
-    name : string
-    slug : string
-}
-
-function usePlatform() {
-  return useQuery ({
-     queryKey : CACHE_KEY_PLATFORMS,
-     queryFn : platformService.getData, 
-     initialData : platforms,
-     staleTime : 24 * 60 * 60 * 1000 // 24hrs
-
-  })
-}
+const usePlatform = (platformId ?: number) => {
+  const { data: platforms } = usePlatforms();
+  return platforms.results.find(
+    (platform) => platform.id === platformId
+  )?.name;
+};
 
 export default usePlatform;
