@@ -1,6 +1,6 @@
 import { FetchResponse } from "../services/api-clients";
 import { GameQuery } from "../App";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GAMES } from "../constant";
 import gameService from "../services/game-service";
 import { Platform } from "./usePlatform";
@@ -13,19 +13,29 @@ export interface Game {
   metacritic: number;
 }
 
-function useGames(gameQuery: GameQuery) {
-  return useQuery<FetchResponse<Game>, Error>({
+
+function useGames(gameQuery : GameQuery) {
+  
+  return useInfiniteQuery<FetchResponse<Game>, Error>({
     queryKey: [CACHE_KEY_GAMES, gameQuery],
-    queryFn: () =>
+    queryFn: ({pageParam = 1}) =>
       gameService.getData({
         params: {
           genres: gameQuery.genre?.id,
           parent_platforms: gameQuery.platform?.id,
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
+          page : pageParam,
         }
       }),
-      staleTime : 24*60*60*1000
+      staleTime : 24*60*60*1000, 
+      keepPreviousData : true,
+      // getNextPage param calls this function to compute the next page number
+      //allPages contains the data for each page retrieved
+      getNextPageParam : (lastPage, allPages) => {
+        return lastPage.next ? allPages.length + 1 : undefined;
+      }
+        
   });
 }
 

@@ -3,7 +3,9 @@ import axios, { AxiosRequestConfig } from "axios";
 //T means generic Type Parameter
 export interface FetchResponse<T> {
   count: number;
+  next : string | null,
   results: T[];
+  
 }
 
 const axiosInstance = axios.create({
