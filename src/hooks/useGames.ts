@@ -28,13 +28,14 @@ function useGames(gameQuery : GameQuery) {
           page : pageParam,
         }
       }),
-      staleTime : 24*60*60*1000, 
+      
       keepPreviousData : true,
       // getNextPage param calls this function to compute the next page number
       //allPages contains the data for each page retrieved
       getNextPageParam : (lastPage, allPages) => {
         return lastPage.next ? allPages.length + 1 : undefined;
-      }
+      }, 
+      staleTime : 24*60*60*1000, 
         
   });
 }

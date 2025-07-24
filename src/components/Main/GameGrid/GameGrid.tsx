@@ -1,29 +1,48 @@
-import { Button, SimpleGrid, Text, Box } from "@chakra-ui/react";
+import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { GameQuery } from "../../../App";
 import useGames from "../../../hooks/useGames";
 import GameCard from "../GameCard/GameCard";
-import GameCardSkeleton from "../GameCard/GameCardSkeleton";
 import GameCardContainer from "../GameCard/GameCardContainer";
-import { GameQuery } from "../../../App";
-import React from "react";
+import GameCardSkeleton from "../GameCard/GameCardSkeleton";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 function GameGrid({ gameQuery }: Props) {
- 
-  const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGames(gameQuery);
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useGames(gameQuery);
   const skeletonCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  {console.log(isFetchingNextPage)}
+  {
+    console.log(isFetchingNextPage);
+  }
 
   if (error) return <Text>{error.message}</Text>;
+  // reduce syntax - function (accumlator, object) per iteration count the number of result, 0 for the initial value
+  const fetchedGamesCount =
+    data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
 
   return (
-    <Box padding="20px">
+    <InfiniteScroll
+      // datalength represents the number of data that is fetched
+      dataLength={fetchedGamesCount}
+      next={() => fetchNextPage()}
+      hasMore={!!hasNextPage}
+      loader={<Spinner marginY={5} />}
+    >
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={6}
+        padding="20px"
       >
         {isLoading &&
           skeletonCards.map((skeleton) => (
@@ -47,11 +66,18 @@ function GameGrid({ gameQuery }: Props) {
           </GameCardContainer>
           
         ))} */}
-
-        
       </SimpleGrid>
-      {hasNextPage && <Button marginY={5} disabled = {isFetchingNextPage} onClick={()=> fetchNextPage()}>  Load More </Button>}
-    </Box>
+      {/* {hasNextPage && (
+          <Button
+            marginY={5}
+            disabled={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+          >
+            {" "}
+            Load More{" "}
+          </Button>
+        )} */}
+    </InfiniteScroll>
   );
 }
 
