@@ -37,7 +37,7 @@ const GameDetailPage = () => {
 
   return (
     <div>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} className="px-7">
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} className="max-w-[1280px] mx-auto p-8">
         <Box>
           <Heading>{game.name}</Heading>
           <ExpandableDescription>{text ?? ""}</ExpandableDescription>
