@@ -5,12 +5,6 @@ import { CACHE_KEY_PLATFORMS } from "../constant";
 import platformService from "../services/platform-service";
 
 
-export interface Platform {
-    id : number
-    name : string
-    slug : string
-}
-
 function usePlatforms() {
   return useQuery ({
      queryKey : CACHE_KEY_PLATFORMS,

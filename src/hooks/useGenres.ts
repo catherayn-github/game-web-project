@@ -5,12 +5,6 @@ import { CACHE_KEY_GENRES } from "../constant";
 import genreService from "../services/genre-service";
 
 
-export interface Genre {
-  id: number;
-  name: string;
-  image_background: string;
-}
-
 function useGenres() {
   return useQuery({
     queryKey: CACHE_KEY_GENRES,

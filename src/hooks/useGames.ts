@@ -4,15 +4,7 @@ import { CACHE_KEY_GAMES } from "../constant";
 import { FetchResponse } from "../services/api-clients";
 import gameService from "../services/game-service";
 import useGameQueryStore from "../store/storeGameQuery";
-import { Platform } from "./usePlatforms";
-
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[]; //array of objects where each objects has a property called Platform of type Platform
-  metacritic: number;
-}
+import Game from "../entities/Game";
 
 function useGames() {
   const  gameQuery  = useGameQueryStore(s => s.gameQuery);

@@ -1,4 +1,4 @@
-import { GameQuery } from "../App";
+
 import useGenres from "./useGenres";
 
 const useGenre = (genreId ?: number) => {

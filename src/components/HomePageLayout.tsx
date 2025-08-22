@@ -1,28 +1,25 @@
-import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import ListOfGenres from "./components/Aside/ListOfGenres/ListOfGenres";
-import GameGrid from "./components/Main/GameGrid/GameGrid";
-import GameHeader from "./components/Main/GameHeader/GameHeader";
-import PlatformFilter from "./components/Main/PlatformFilter/PlatformFilter";
-import SortFilter from "./components/Main/SortFilter/SortFilter";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
+import { Grid, GridItem, Show, Box, HStack } from "@chakra-ui/react";
+import React from "react";
+import ListOfGenres from "./Aside/ListOfGenres/ListOfGenres";
+import GameGrid from "./Main/GameGrid/GameGrid";
+import GameHeader from "./Main/GameHeader/GameHeader";
+import PlatformFilter from "./Main/PlatformFilter/PlatformFilter";
+import SortFilter from "./Main/SortFilter/SortFilter";
+import NavigationBar from "./NavigationBar/NavigationBar";
 
-function App() {
+const HomePageLayout = () => {
   return (
     <div>
       <Grid
         templateAreas={{
-          base: `"nav" "main"`,
-          lg: `"nav nav" "aside main"`, // this is for large devices that is 1024px and above
+          base: `"main"`,
+          lg: `"aside main"`, // this is for large devices that is 1024px and above
         }}
         templateColumns={{
           base: "1fr",
           lg: "200px 1fr",
         }}
       >
-        <GridItem area="nav">
-          <NavigationBar />
-        </GridItem>
-        
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
             <ListOfGenres />
@@ -40,11 +37,11 @@ function App() {
             </HStack>
           </Box>
 
-          <GameGrid/>
+          <GameGrid />
         </GridItem>
       </Grid>
     </div>
   );
-}
+};
 
-export default App;
+export default HomePageLayout;

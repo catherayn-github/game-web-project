@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+
 //T means generic Type Parameter
 export interface FetchResponse<T> {
   count: number;
   next : string | null,
   results: T[];
-  
 }
 
 const axiosInstance = axios.create({
@@ -27,6 +27,15 @@ class APIClient<T> {
       .get<FetchResponse<T>>(this.endpoint, requestConfig)
       .then((response) => response.data);
   };
+
+  getDetail = (id : number | string) => {
+    return axiosInstance
+      .get<T>(this.endpoint + `/${id}`)
+      .then((response) => response.data);
+  };
+
+
+  
 }
 
 export default APIClient;
